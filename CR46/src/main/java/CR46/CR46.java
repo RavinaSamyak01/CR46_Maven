@@ -324,11 +324,10 @@ public class CR46 {
 		try {
 			// Email.sendMail("parth.doshi@samyak.com", subject, msg.toString(), "");
 
-			/*
-			 * Email.sendMail(
-			 * "parth.doshi@samyak.com,asharma@samyak.com,ravina.prajapati@samyak.com,pgandhi@samyak.com,manthan.doshi@samyak.com,urvashi.Patel@samyak.com",
-			 * subject, msg.toString(), "");
-			 */
+			Email.sendMail(
+					"parth.doshi@samyak.com,asharma@samyak.com,ravina.prajapati@samyak.com,pgandhi@samyak.com,manthan.doshi@samyak.com,urvashi.Patel@samyak.com",
+					subject, msg.toString(), "");
+
 		} catch (Exception ex) {
 			Logger.getLogger(CR46.class.getName()).log(Level.SEVERE, null, ex);
 		}
