@@ -1,13 +1,18 @@
 package CR46;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -65,6 +70,18 @@ public class CR46 {
 
 	}
 
+	public static String getScreenshot(WebDriver driver, String screenshotName) throws IOException {
+
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File source = ts.getScreenshotAs(OutputType.FILE);
+		// after execution, you could see a folder "FailedTestsScreenshots" under src
+		// folder
+		String destination = System.getProperty("user.dir") + "/Report/NA_Screenshot/" + screenshotName + ".png";
+		File finalDestination = new File(destination);
+		FileUtils.copyFile(source, finalDestination);
+		return destination;
+	}
+
 	@Test
 	public static void cr46() throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, 50);
@@ -77,24 +94,100 @@ public class CR46 {
 			if (Env.equalsIgnoreCase("Pre-Prod")) {
 				String baseUrl = storage.getProperty("PREPRODURL");
 				driver.get(baseUrl);
-				Password = storage.getProperty("PREPRODPassword");
-				Password3 = Password;
+				try {
+					Password = storage.getProperty("PREPRODPassword");
+					Password3 = Password;
+				} catch (Exception e) {
+					msg.append("URL is not working==FAIL");
+					getScreenshot(driver, "LoginIssue");
+					driver.quit();
+					Env = storage.getProperty("Env");
+					String File = ".//Screenshots//LoginIssue.png";
+					String subject = "Selenium Automation Script: " + Env + " : CR46 Smoke Testing";
+					try {
+						// Email.sendMail("parth.doshi@samyak.com", subject, msg.toString(), "");
+
+						Email.sendMail(
+								"parth.doshi@samyak.com,asharma@samyak.com,ravina.prajapati@samyak.com,pgandhi@samyak.com,manthan.doshi@samyak.com,urvashi.Patel@samyak.com",
+								subject, msg.toString(), File);
+
+					} catch (Exception ex) {
+						Logger.getLogger(CR46.class.getName()).log(Level.SEVERE, null, ex);
+					}
+				}
+
 			} else if (Env.equalsIgnoreCase("STG")) {
 				String baseUrl = storage.getProperty("STGURL");
 				driver.get(baseUrl);
-				Password = storage.getProperty("STGPassword");
-				Password3 = Password;
+				try {
+					Password = storage.getProperty("STGPassword");
+					Password3 = Password;
+				} catch (Exception e) {
+					msg.append("URL is not working==FAIL");
+					getScreenshot(driver, "LoginIssue");
+					driver.quit();
+					Env = storage.getProperty("Env");
+					String File = ".//Screenshots//LoginIssue.png";
+					String subject = "Selenium Automation Script: " + Env + " : CR46 Smoke Testing";
+					try {
+						// Email.sendMail("parth.doshi@samyak.com", subject, msg.toString(), "");
+
+						Email.sendMail(
+								"parth.doshi@samyak.com,asharma@samyak.com,ravina.prajapati@samyak.com,pgandhi@samyak.com,manthan.doshi@samyak.com,urvashi.Patel@samyak.com",
+								subject, msg.toString(), File);
+
+					} catch (Exception ex) {
+						Logger.getLogger(CR46.class.getName()).log(Level.SEVERE, null, ex);
+					}
+				}
 			} else if (Env.equalsIgnoreCase("DEV")) {
 				String baseUrl = storage.getProperty("DEVURL");
 				driver.get(baseUrl);
-				Password = storage.getProperty("DEVPassword");
-				Password3 = Password;
+				try {
+					Password = storage.getProperty("DEVPassword");
+					Password3 = Password;
+				} catch (Exception e) {
+					msg.append("URL is not working==FAIL");
+					getScreenshot(driver, "LoginIssue");
+					driver.quit();
+					Env = storage.getProperty("Env");
+					String File = ".//Screenshots//LoginIssue.png";
+					String subject = "Selenium Automation Script: " + Env + " : CR46 Smoke Testing";
+					try {
+						// Email.sendMail("parth.doshi@samyak.com", subject, msg.toString(), "");
+
+						Email.sendMail(
+								"parth.doshi@samyak.com,asharma@samyak.com,ravina.prajapati@samyak.com,pgandhi@samyak.com,manthan.doshi@samyak.com,urvashi.Patel@samyak.com",
+								subject, msg.toString(), File);
+
+					} catch (Exception ex) {
+						Logger.getLogger(CR46.class.getName()).log(Level.SEVERE, null, ex);
+					}
+				}
 			} else if (Env.equalsIgnoreCase("Prod")) {
 				String baseUrl = storage.getProperty("PRODURL");
 				driver.get(baseUrl);
-				Password = storage.getProperty("ProdSPwd0To2");
-				Password3 = storage.getProperty("ProdSPwd3");
+				try {
+					Password = storage.getProperty("ProdSPwd0To2");
+					Password3 = storage.getProperty("ProdSPwd3");
+				} catch (Exception e) {
+					msg.append("URL is not working==FAIL");
+					getScreenshot(driver, "LoginIssue");
+					driver.quit();
+					Env = storage.getProperty("Env");
+					String File = ".//Screenshots//LoginIssue.png";
+					String subject = "Selenium Automation Script: " + Env + " : CR46 Smoke Testing";
+					try {
+						// Email.sendMail("parth.doshi@samyak.com", subject, msg.toString(), "");
 
+						Email.sendMail(
+								"parth.doshi@samyak.com,asharma@samyak.com,ravina.prajapati@samyak.com,pgandhi@samyak.com,manthan.doshi@samyak.com,urvashi.Patel@samyak.com",
+								subject, msg.toString(), File);
+
+					} catch (Exception ex) {
+						Logger.getLogger(CR46.class.getName()).log(Level.SEVERE, null, ex);
+					}
+				}
 			}
 			Thread.sleep(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("txtUserId")));
