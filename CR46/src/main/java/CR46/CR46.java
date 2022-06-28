@@ -43,7 +43,7 @@ public class CR46 {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--headless");
+		//options.addArguments("--headless");
 		options.addArguments("--incognito");
 		options.addArguments("--test-type");
 		options.addArguments("--no-proxy-server");
@@ -51,6 +51,8 @@ public class CR46 {
 		options.addArguments("--disable-extensions");
 		options.addArguments("--no-sandbox");
 		options.addArguments("--start-maximized");
+		options.addArguments("--disable-site-isolation-trials");
+
 		// options.addArguments("window-size=800x600");
 		// options.addArguments("window-size=1366x788");
 		capabilities.setPlatform(Platform.ANY);
